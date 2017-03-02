@@ -7,6 +7,16 @@
     <link type="text/css" rel="stylesheet" href="{% static 'django_blog.css' %}">
   </head>
   <body>
+    <div id="header">
+      <ul id="control-bar">
+      {% if user.is_authenticated %}
+        {% if user.is_staff %}<li>admin</li>{% endif %}
+        <li>logout</li>
+      {% else %}
+        <li>login</li>
+      {% endif %}
+      </ul>
+    </div>
     <div id="container">
       <div id="content">
       {% block content %}
@@ -14,5 +24,11 @@
       {% endblock %}
       </div>
     </div>
+    <!-- admin link -->
+    <a href="{% url 'admin:index' %}">admin</a>
+    <!-- logout link -->
+    <a href="{% url 'logout' %}">logout</a>
+    <!-- login link -->
+    <a href="{% url 'login' %}">login</a>
   </body>
 </html>
