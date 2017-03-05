@@ -24,16 +24,6 @@ It would be much easier if we could designate a category for a post from the
     Category admin.
 """
 
-
-class PostAdmin(admin.ModelAdmin):
-    # Category.name
-    # 'created_date' 'modified_date' is non-editable field
-    # pass
-    fields = ('title', 'text', 'author','published_date') # 'name')
-
-admin.site.register(Post, PostAdmin)
-
-
 class CategoryAdmin(admin.ModelAdmin):
     #exclude Post field
     fields = ('name', 'description')
@@ -43,4 +33,16 @@ admin.site.register(Category, CategoryAdmin)
 
 
 class CategoriesInline(admin.TabularInline):
-    model = Post
+    model = Category.name.through
+
+
+class PostAdmin(admin.ModelAdmin):
+    # Add Category.name
+    # 'created_date' 'modified_date' are non-editable fields
+    # <class 'myblog.admin.CategoriesInline'>: (admin.E202) 'myblog.Category' has no ForeignKey to 'myblog.Post'.
+    inlines = [
+        CategoriesInline,
+    ]
+    fields = ('title', 'text', 'author','published_date', 'name')
+
+admin.site.register(Post, PostAdmin)
