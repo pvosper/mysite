@@ -26,7 +26,10 @@ It would be much easier if we could designate a category for a post from the
 
 
 class PostAdmin(admin.ModelAdmin):
-    pass
+    # Category.name
+    # 'created_date' 'modified_date' is non-editable field
+    # pass
+    fields = ('title', 'text', 'author','published_date') # 'name')
 
 admin.site.register(Post, PostAdmin)
 
@@ -41,9 +44,3 @@ admin.site.register(Category, CategoryAdmin)
 
 class CategoriesInline(admin.TabularInline):
     model = Post
-
-
-class PostAdmin(admin.ModelAdmin):
-    inlines = [
-        CategoriesInline,
-    ]
