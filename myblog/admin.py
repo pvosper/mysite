@@ -33,7 +33,7 @@ admin.site.register(Category, CategoryAdmin)
 
 
 class CategoriesInline(admin.TabularInline):
-    model = Category.name.through
+    model = Category.posts.through
 
 
 class PostAdmin(admin.ModelAdmin):
