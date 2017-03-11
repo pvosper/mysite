@@ -39,7 +39,11 @@ def post_new(request):
             post.author = request.user
             post.published_date = timezone.now()
             post.save()
-            return redirect('post_detail.html', pk=post.pk)
+            published = Post.objects.exclude(published_date__exact=None)
+            posts = published.order_by('-published_date')
+            context = {'posts': posts}
+            return render(request, 'list.html', context)
+            # return redirect('detail.html', pk=post.pk)
     else:
         form = PostForm()
     return render(request, 'post_edit.html', {'form': form})
