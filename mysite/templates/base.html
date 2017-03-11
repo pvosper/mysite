@@ -1,5 +1,4 @@
 {% load staticfiles %}
-
 <!DOCTYPE html>
 <html>
   <head>
@@ -10,10 +9,11 @@
     <div id="header">
       <ul id="control-bar">
       {% if user.is_authenticated %}
-        {% if user.is_staff %}<li>admin</li>{% endif %}
-        <li>logout</li>
+        {% if user.is_staff %}<li><a href="{% url 'admin:index' %}">admin</a></li>{% endif %}
+        <li><a href="{% url 'post_new' %}">new post</a></li>
+        <li><a href="{% url 'logout' %}">logout</a></li>
       {% else %}
-        <li>login</li>
+        <li><a href="{% url 'login' %}">login</a></li>
       {% endif %}
       </ul>
     </div>
@@ -24,11 +24,5 @@
       {% endblock %}
       </div>
     </div>
-    <!-- admin link -->
-    <a href="{% url 'admin:index' %}">admin</a>
-    <!-- logout link -->
-    <a href="{% url 'logout' %}">logout</a>
-    <!-- login link -->
-    <a href="{% url 'login' %}">login</a>
   </body>
 </html>

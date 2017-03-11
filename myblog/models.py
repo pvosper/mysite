@@ -18,8 +18,8 @@ class Post(models.Model):
 class Category(models.Model):
     name = models.CharField(max_length=128)
     description = models.TextField(blank=True)
-    posts = models.ManyToManyField(Post, blank=True, null=True,
-                                   related_name='categories')
+    posts = models.ManyToManyField(Post, blank=True, related_name='categories')
+    # null=True, (fields.W340) null has no effect on ManyToManyField
 
     class Meta:
         verbose_name_plural = 'Categories'
